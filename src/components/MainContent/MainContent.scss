@@ -1,0 +1,51 @@
+.main-content {
+    grid-area: content;
+    padding: 20px;
+    .movie-detail-container {
+        >div {
+            padding: 20px 0px;
+        }
+        >div:not(:last-child) {
+            border-bottom: 1px solid;
+        }
+        .rating {
+            display: flex;
+            >div {
+                flex: 1 1;
+                text-align: center;
+                line-height: 30px;
+            }
+            >div:not(:last-child) {
+                border-right: 1px solid;
+            }
+        }
+        .row-1 {
+            display: flex;
+            .poster {
+                width: 200px;
+                height: 300px;
+                flex: 0 0 200px;
+                background-color: gray;
+                border-radius: 4px;
+                margin-right: 20px;
+            }
+            .info-container {
+                flex: 1 1 auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                .watchlist-button {
+                    text-align: right;
+                }
+                .info {
+                    >div {
+                        margin-top: 20px;
+                    }
+                    .title {
+                        font-size: 30px;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,58 @@
+.header {
+    grid-area: header;
+    background-color: #666666;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff;
+    .search-bar-container {
+        flex: 1 1 auto;
+    }
+    .movie-filter-container {
+        display: flex;
+        .filter-by-year {
+            width: 300px;
+            margin-right: 40px;
+        }
+    }
+    .MuiRadio-root {
+        color: #ffffff;
+    }
+    .MuiFormLabel-root {
+        color: #ffffff;
+        &.Mui-focused {
+            color: #ffffff;
+        }
+    }
+    // .MuiSlider-root {
+    //     color: #ffffff;
+    //     .MuiSlider-rail {
+    //         height: 6px;
+    //         border-radius: 3px;
+    //         background-color: #ffffff;
+    //     }
+    //     .MuiSlider-track {
+    //         height: 6px;
+    //     }
+    //     .MuiSlider-thumb {
+    //         height: 15px;
+    //         width: 15px;
+    //     }
+    // }
+}
+
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: "red"
+  }
+  
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: "red"
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10+ */
+   color: "red"
+  } 
+  

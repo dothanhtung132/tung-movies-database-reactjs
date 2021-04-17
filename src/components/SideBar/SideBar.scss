@@ -1,0 +1,27 @@
+.side-bar {
+    grid-area: sidebar;
+    padding: 20px;
+
+    .movie-item {
+        display: flex;
+        align-items: center;
+        background-color: #ccc;
+        padding: 30px;
+        .movie-thumbnail {
+            width: 80px;
+            height: 80px;
+            background-color: green;
+            margin-right: 20px;
+            flex: 0 0 80px;
+            border-radius: 4px;
+        }
+        .movie-info {
+            flex: 1 1 auto;
+            font-size: 18px;
+            .year {
+                color: gray;
+                margin-top: 10px;
+            }
+        }
+    }
+}
