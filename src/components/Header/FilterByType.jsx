@@ -7,7 +7,7 @@ const filterType = [
         value: "Any"
     },
     {
-        id: "movies",
+        id: "movie",
         value: "Movies"
     },
     {
@@ -15,7 +15,7 @@ const filterType = [
         value: "Series"
     },
     {
-        id: "episodes",
+        id: "episode",
         value: "Episodes"
     }
 ];
