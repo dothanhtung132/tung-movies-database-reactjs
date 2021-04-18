@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import {
     FETCH_MOVIES_REQUEST,
     FETCH_MOVIES_SUCCESS,
@@ -5,15 +6,19 @@ import {
     Apikey
 } from '../constants/movieConstant';
 
-export const loadMovies = (search = 'star wars') => async dispatch => {
+export const loadMovies = (movieFilter) => async dispatch => {
+    let {title, type, year, page} = movieFilter;
+    if (!title) return;
     try {
         dispatch({type: FETCH_MOVIES_REQUEST});
-
-        const url = `https://www.omdbapi.com/?apikey=${Apikey}&s=${search}`;
+        const url = `https://www.omdbapi.com/?apikey=${Apikey}&s=${title}&type=${type === 'any' ? '' : type}&y=${year}&page=${page}`;
         const response = await fetch(url);
         const responseJSON = await response.json();
-
-        dispatch({type: FETCH_MOVIES_SUCCESS, data: responseJSON});
+        if (responseJSON.Response === 'True') {
+            dispatch({type: FETCH_MOVIES_SUCCESS, data: responseJSON});
+        } else {
+            dispatch({type: FETCH_MOVIES_ERROR, message: responseJSON.Error});
+        }
     } catch (error) {
         console.log('error :>> ', error);
         dispatch({type: FETCH_MOVIES_ERROR, message: error});

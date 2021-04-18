@@ -1,5 +1,6 @@
 import { Grid, Slider, Typography, withStyles } from '@material-ui/core';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 const FilterByYearSlider = withStyles({
     root: {
@@ -24,9 +25,12 @@ const FilterByYearSlider = withStyles({
 })(Slider);
   
 const FilterByYear = () => {
-    const [value, setValue] = useState([20, 70]);
+    const [filterYear, setFilterYear] = useState([20, 70]);
+    const dispatch = useDispatch();
+
     const handleSliderChange = (event, newValue) => {
-        setValue(newValue);
+        setFilterYear(newValue);
+        dispatch({type: 'FILTER_MOVIE_BY_YEAR', data: newValue});
     };
     return (
         <div className='filter-by-year'>
@@ -39,7 +43,7 @@ const FilterByYear = () => {
                 </Grid>
                 <Grid item xs>
                     <FilterByYearSlider
-                        value={value}
+                        value={filterYear}
                         onChange={handleSliderChange}
                         aria-labelledby="filter-by-year-slider"
                         getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}

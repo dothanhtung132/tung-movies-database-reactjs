@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
 
-const filterType = [
+const filterTypeData = [
     {
         id: "any",
         value: "Any"
@@ -21,18 +22,23 @@ const filterType = [
 ];
   
 const FilterByType = () => {
-    const [value, setValue] = React.useState('any');
+    const [filterType, setFilterType] = React.useState('any');
+    const dispatch = useDispatch();
 
     const handleFilterByTypeChange = (event) => {
-        setValue(event.target.value);
+        setFilterType(event.target.value);
     };
+
+    useEffect(() => {
+        dispatch({type: 'FILTER_MOVIE_BY_TYPE', data: filterType});
+    }, [filterType, dispatch])
 
     return (
         <div className='filter-by-type'>
             <FormControl component="fieldset">
                 <FormLabel component="legend">TYPE</FormLabel>
-                <RadioGroup row aria-label="filterByType" name="filterByType" value={value} onChange={handleFilterByTypeChange}>
-                    {filterType.map(item => (
+                <RadioGroup row aria-label="filterByType" name="filterByType" value={filterType} onChange={handleFilterByTypeChange}>
+                    {filterTypeData.map(item => (
                         <FormControlLabel
                             label={item.value}
                             key={item.id}

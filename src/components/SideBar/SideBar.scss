@@ -18,12 +18,12 @@
             .movie-thumbnail {
                 width: 80px;
                 height: 80px;
-                background-color: green;
                 margin-right: 20px;
                 flex: 0 0 80px;
                 border-radius: 4px;
                 background-size: cover;
                 background-position: center;
+                border: 1px solid #bbbbbb;
             }
             .movie-info {
                 flex: 1 1 auto;
@@ -33,6 +33,13 @@
                     margin-top: 10px;
                 }
             }
+        }
+        .load-more-result {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
         }
     }
 }

@@ -11,7 +11,7 @@ const initialState = {
     data: null
 }
 
-const movieReducer = (state = initialState, payload) => {
+const movieListReducer = (state = initialState, payload) => {
     switch (payload.type) {
         case FETCH_MOVIES_REQUEST:
             return {
@@ -39,4 +39,4 @@ const movieReducer = (state = initialState, payload) => {
     }
 };
 
-export default movieReducer;
+export default movieListReducer;
