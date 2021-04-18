@@ -3,7 +3,7 @@ import { SearchRounded } from '@material-ui/icons';
 import React from 'react';
 
 const useStyles = makeStyles({
-    customPlaceHolderColor: {
+    customSearchField: {
         "& input::placeholder": {
             color: "#ffffff"
         }
@@ -24,9 +24,9 @@ const SearchBar = () => {
                         placeholder="Search..."
                         InputProps={{
                             disableUnderline: true,
-                            style: { fontSize: "20px" }
+                            style: { fontSize: "24px", color: '#ffffff', fontWeight: '400' },
+                            className: classes.customSearchField
                         }}
-                        classes={{ root: classes.customPlaceHolderColor }}
                     />
                 </Grid>
             </Grid>

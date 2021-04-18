@@ -16,9 +16,18 @@
             width: 300px;
             margin-right: 40px;
         }
+        .filter-by-type {
+            padding-top: 3px;
+        }
     }
-    .MuiRadio-root {
-        color: #ffffff;
+    .MuiFormGroup-root {
+        margin-top: 2px;
+        .MuiIconButton-label {
+            color: #ffffff;
+            &.Mui-focused {
+                color: #ffffff;
+            }
+        }
     }
     .MuiFormLabel-root {
         color: #ffffff;
@@ -26,21 +35,6 @@
             color: #ffffff;
         }
     }
-    // .MuiSlider-root {
-    //     color: #ffffff;
-    //     .MuiSlider-rail {
-    //         height: 6px;
-    //         border-radius: 3px;
-    //         background-color: #ffffff;
-    //     }
-    //     .MuiSlider-track {
-    //         height: 6px;
-    //     }
-    //     .MuiSlider-thumb {
-    //         height: 15px;
-    //         width: 15px;
-    //     }
-    // }
 }
 
 

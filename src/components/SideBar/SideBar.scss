@@ -1,12 +1,17 @@
 .side-bar {
     grid-area: sidebar;
-    padding: 20px;
-
+    border-right: 1px solid #bbbbbb;
+    .search-total-result {
+        padding: 30px;
+    }
     .movie-item {
         display: flex;
         align-items: center;
-        background-color: #ccc;
         padding: 30px;
+        border-bottom: 1px solid #bbbbbb;
+        &.active {
+            background-color: #ebebeb;
+        }
         .movie-thumbnail {
             width: 80px;
             height: 80px;
