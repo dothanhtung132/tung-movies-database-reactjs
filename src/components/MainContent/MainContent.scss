@@ -27,6 +27,8 @@
                 flex: 0 0 200px;
                 background-color: gray;
                 border-radius: 4px;
+                background-size: cover;
+                background-position: center;
             }
             .info-container {
                 flex: 1 1 auto;
@@ -42,7 +44,13 @@
                         margin-top: 20px;
                     }
                     .title {
-                        font-size: 30px;
+                        font-size: 35px;
+                        font-weight: 600;
+                    }
+                    .rated {
+                        border: 1px solid;
+                        border-radius: 5px;
+                        padding: 3px 10px;
                     }
                 }
             }
