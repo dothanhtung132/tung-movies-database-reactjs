@@ -1,6 +1,5 @@
 import React from 'react';
-import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, styled } from '@material-ui/core';
-import { green } from '@material-ui/core/colors';
+import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@material-ui/core';
 
 const filterType = [
     {
@@ -24,7 +23,7 @@ const filterType = [
 const FilterByType = () => {
     const [value, setValue] = React.useState('any');
 
-    const handleChange = (event) => {
+    const handleFilterByTypeChange = (event) => {
         setValue(event.target.value);
     };
 
@@ -32,7 +31,7 @@ const FilterByType = () => {
         <div className='filter-by-type'>
             <FormControl component="fieldset">
                 <FormLabel component="legend">TYPE</FormLabel>
-                <RadioGroup row aria-label="filterByType" name="filterByType" value={value} onChange={handleChange}>
+                <RadioGroup row aria-label="filterByType" name="filterByType" value={value} onChange={handleFilterByTypeChange}>
                     {filterType.map(item => (
                         <FormControlLabel
                             label={item.value}

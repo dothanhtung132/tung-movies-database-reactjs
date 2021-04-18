@@ -1,26 +1,39 @@
+import { List, makeStyles } from '@material-ui/core';
 import React from 'react';
 import './SideBar.scss';
+import SideBarListItem from './SideBarListItem';
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+      "&::-webkit-scrollbar": {
+        width: 12,
+      },
+      "&::-webkit-scrollbar-track": {
+        backgroundColor: 'transparent',
+      },
+      "&::-webkit-scrollbar-thumb": {
+        backgroundColor: "#c4c4c4",
+      },
+    },
+  }));
+  
 const SideBar = () => {
+    const classes = useStyles();
     return (
         <div className='side-bar'>
-            <div className='search-total-result'>582 RESULTS</div>
-            <div className='movie-list'>
-            <div className='movie-item'>
-                    <div className='movie-thumbnail'>image</div>
-                    <div className='movie-info'>
-                        <div className='name'>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
-                        <div className='year'>1970</div>
-                    </div>
-                </div>
-                <div className='movie-item active'>
-                    <div className='movie-thumbnail'>image</div>
-                    <div className='movie-info'>
-                        <div className='name'>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
-                        <div className='year'>1970</div>
-                    </div>
-                </div>
-            </div>
+            <List className={`movie-list ${classes.root}`}>
+                <div className='search-total-result'>582 RESULTS</div>
+                <SideBarListItem />
+                <SideBarListItem />
+                <SideBarListItem />
+                <SideBarListItem />
+                <SideBarListItem />
+                <SideBarListItem />
+                <SideBarListItem />
+                <SideBarListItem />
+                <SideBarListItem />
+                <SideBarListItem />
+            </List>
         </div>
     );
 };
