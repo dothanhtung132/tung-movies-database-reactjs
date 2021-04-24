@@ -10,7 +10,7 @@ export const loadMovies = (movieFilter) => async dispatch => {
     if (!title) return;
     try {
         dispatch({type: FETCH_MOVIES_REQUEST});
-        const url = `https://www.omdbapi.com/?apikey=${Apikey}&s=${title}&type=${type === 'any' ? '' : type}&page=${page}`;
+        const url = `https://www.omdbapi.com/?apikey=${Apikey}&s=${title}&type=${(!type || type === 'any') ? '' : type}&page=${page}`;
         const response = await fetch(url);
         const responseJSON = await response.json();
         if (responseJSON.Response === 'True') {

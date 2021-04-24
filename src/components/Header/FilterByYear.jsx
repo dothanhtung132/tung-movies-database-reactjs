@@ -28,7 +28,7 @@ const FilterByYearSlider = withStyles({
         top: -22,
         '& *': {
           background: 'transparent',
-          color: '#000',
+          color: '#ffffff',
         },
     },
 })(Slider);
@@ -38,6 +38,7 @@ const FilterByYear = () => {
     const dispatch = useDispatch();
 
     const debouncedFunc = useDebounce(value => {
+        console.log('value :>> ', value);
         dispatch({type: 'FILTER_MOVIE_BY_YEAR', data: value});
     }, 500);
 

@@ -7,18 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadMovies } from '../../redux/actions/movieAction';
 
 const HomePage = () => {
-
-    // const type = useSelector(state => state.movieList.type);
-    // console.log('type :>> ', type);
-    // useEffect(() => {
-    //     console.log('type :>> ', type);
-    // }, [type])
-
-    const movieFilter = useSelector(state => state.movieFilter);
+    const {title, type, page} = useSelector(state => state.movieFilter);
     const dispatch = useDispatch();
+
     useEffect(() => {
-        dispatch(loadMovies(movieFilter));
-    }, [dispatch, movieFilter]);
+        dispatch(loadMovies({title, type, page}));
+    }, [dispatch, title, type, page]);
 
     return (
         <div className='home-page'>

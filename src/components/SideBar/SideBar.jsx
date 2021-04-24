@@ -1,5 +1,5 @@
 import { List, makeStyles } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './SideBar.scss';
 import SideBarListItem from './SideBarListItem';
@@ -30,22 +30,33 @@ const SideBar = () => {
     dispatch({ type: 'LOAD_MORE_RESULT' });
   }
 
+  const { year } = useSelector(state => state.movieFilter);
+
+  const [movieList, setMovieList] = useState([]);
+
+  useEffect(() => {
+    const [start, end] = year;
+    let filterList = data.Search.filter(movie => movie.Year >= start && movie.Year <= end);
+    console.log('filterList :>> ', filterList);
+    setMovieList(filterList);
+  }, [year, data]);
+
   return (
     <div className='side-bar'>
       {
         requesting ?
           'requesting'
           :
-          (data && data.Search && data.Search.length > 0) ?
+          (movieList && movieList.length > 0) ?
             <List className={`movie-list ${classes.customScrollbar}`}>
               <div className='search-total-result'>{data.totalResults} RESULTS</div>
-              {data.Search.map((movie) => {
+              {movieList.map((movie) => {
                 return (<SideBarListItem key={movie.imdbID} movie={movie} selected={selectedMovieId === movie.imdbID} />);
               })}
               <div className='load-more-result' onClick={handleLoadMore}>Load More...</div>
             </List>
             :
-            <div>no items</div>
+            <div className='no-result'>No Results</div>
       }
     </div>
   );

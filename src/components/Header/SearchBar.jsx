@@ -1,6 +1,6 @@
 import { Grid, makeStyles, TextField } from '@material-ui/core';
 import { SearchRounded } from '@material-ui/icons';
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useDebounce } from '../../customHooks/useDebounce';
 
