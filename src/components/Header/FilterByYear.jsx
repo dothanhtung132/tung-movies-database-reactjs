@@ -22,15 +22,7 @@ const FilterByYearSlider = withStyles({
         opacity: 1,
         height: 6,
         borderRadius: 3,
-    },
-    valueLabel: {
-        left: -7,
-        top: -22,
-        '& *': {
-          background: 'transparent',
-          color: '#ffffff',
-        },
-    },
+    }
 })(Slider);
 
 const FilterByYear = () => {
@@ -53,7 +45,7 @@ const FilterByYear = () => {
             </Typography>
             <Grid container spacing={2} alignItems="center">
                 <Grid item>
-                    <Typography>1970</Typography>
+                    <Typography>{filterYear[0]}</Typography>
                 </Grid>
                 <Grid item xs>
                     <FilterByYearSlider
@@ -62,11 +54,10 @@ const FilterByYear = () => {
                         aria-labelledby="filter-by-year-slider"
                         min={1970}
                         max={2015}
-                        valueLabelDisplay="on"
                     />
                 </Grid>
                 <Grid item>
-                    <Typography>2015</Typography>
+                    <Typography>{filterYear[1]}</Typography>
                 </Grid>
             </Grid>
 

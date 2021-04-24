@@ -2,7 +2,6 @@ import {
     FETCH_MOVIES_REQUEST,
     FETCH_MOVIES_SUCCESS,
     FETCH_MOVIES_ERROR,
-    LOAD_MORE_RESULT
 } from '../constants/movieConstant';
 
 const initialState = {
