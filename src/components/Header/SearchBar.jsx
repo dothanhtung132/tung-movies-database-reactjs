@@ -2,6 +2,7 @@ import { Grid, makeStyles, TextField } from '@material-ui/core';
 import { SearchRounded } from '@material-ui/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useDebounce } from '../../customHooks/useDebounce';
 
 const useStyles = makeStyles({
     customSearchField: {
@@ -14,27 +15,18 @@ const useStyles = makeStyles({
 const SearchBar = () => {
     const classes = useStyles();
 
-    const [title, setTitle] = useState('');
-
-    let timerIdRef = useRef();
-
-    const handleTextFieldChange = (event) => {
-        setTitle(event.target.value);
-    }
-
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (timerIdRef.current) {
-            clearTimeout(timerIdRef.current);
+    const debouncedFunc = useDebounce(title => {
+        console.log('title :>> ', title);
+        if (title) {
+            dispatch({ type: 'FILTER_MOVIE_BY_TITLE', data: title });
         }
-        timerIdRef.current = setTimeout(()=>{
-            if (title) {
-                dispatch({type: 'FILTER_MOVIE_BY_TITLE', data: title});
-            }
-        }, 750);
-        return () => clearTimeout(timerIdRef.current);
-    }, [title, dispatch]);
+    }, 500);
+
+    const handleTextFieldChange = (event) => {
+        debouncedFunc(event.target.value);
+    }
 
     return (
         <div>

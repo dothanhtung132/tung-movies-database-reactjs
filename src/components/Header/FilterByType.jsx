@@ -26,12 +26,10 @@ const FilterByType = () => {
     const dispatch = useDispatch();
 
     const handleFilterByTypeChange = (event) => {
-        setFilterType(event.target.value);
-    };
-
-    useEffect(() => {
+        const filterType = event.target.value;
+        setFilterType(filterType);
         dispatch({type: 'FILTER_MOVIE_BY_TYPE', data: filterType});
-    }, [filterType, dispatch])
+    };
 
     return (
         <div className='filter-by-type'>

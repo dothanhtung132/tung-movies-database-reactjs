@@ -1,3 +1,4 @@
+$text-color: #ffffff;
 .header {
     grid-area: header;
     background-color: #666666;
@@ -9,6 +10,12 @@
     color: #ffffff;
     .search-bar-container {
         flex: 1 1 auto;
+        input:-webkit-autofill {
+            -webkit-text-fill-color: $text-color;
+            -webkit-box-shadow: 0 0 0px 1000px #666666 inset;
+            transition: background-color 5000s ease-in-out 0s;
+            caret-color: $text-color;
+        }
     }
     .movie-filter-container {
         display: flex;
@@ -23,16 +30,16 @@
     .MuiFormGroup-root {
         margin-top: 2px;
         .MuiIconButton-label {
-            color: #ffffff;
+            color: $text-color;
             &.Mui-focused {
-                color: #ffffff;
+                color: $text-color;
             }
         }
     }
     .MuiFormLabel-root {
-        color: #ffffff;
+        color: $text-color;
         &.Mui-focused {
-            color: #ffffff;
+            color: $text-color;
         }
     }
 }

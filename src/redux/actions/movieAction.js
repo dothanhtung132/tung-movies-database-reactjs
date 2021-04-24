@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import {
     FETCH_MOVIES_REQUEST,
     FETCH_MOVIES_SUCCESS,
@@ -7,11 +6,11 @@ import {
 } from '../constants/movieConstant';
 
 export const loadMovies = (movieFilter) => async dispatch => {
-    let {title, type, year, page} = movieFilter;
+    let {title, type, page} = movieFilter;
     if (!title) return;
     try {
         dispatch({type: FETCH_MOVIES_REQUEST});
-        const url = `https://www.omdbapi.com/?apikey=${Apikey}&s=${title}&type=${type === 'any' ? '' : type}&y=${year}&page=${page}`;
+        const url = `https://www.omdbapi.com/?apikey=${Apikey}&s=${title}&type=${type === 'any' ? '' : type}&page=${page}`;
         const response = await fetch(url);
         const responseJSON = await response.json();
         if (responseJSON.Response === 'True') {
