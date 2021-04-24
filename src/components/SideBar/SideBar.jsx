@@ -19,6 +19,7 @@ const SideBar = () => {
   const classes = useStyles();
 
   const data = useSelector(state => state.movieList.data);
+  const totalResults = useSelector(state => state.movieList.totalResults);
   const requesting = useSelector(state => state.movieList.requesting);
 
   const movieDetail = useSelector(state => state.movieDetail.movie);
@@ -35,21 +36,34 @@ const SideBar = () => {
   const [movieList, setMovieList] = useState([]);
 
   useEffect(() => {
+    if (!year) {
+      setMovieList(data);
+      return;
+    }
     const [start, end] = year;
-    let filterList = data.Search.filter(movie => movie.Year >= start && movie.Year <= end);
-    console.log('filterList :>> ', filterList);
+    let filterList = data.filter(movie => movie.Year >= start && movie.Year <= end);
     setMovieList(filterList);
   }, [year, data]);
+
+  function handleScroll() {
+    if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
+    console.log('Fetch more list items!');
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className='side-bar'>
       {
-        requesting ?
+        requesting && !movieList ?
           'requesting'
           :
           (movieList && movieList.length > 0) ?
             <List className={`movie-list ${classes.customScrollbar}`}>
-              <div className='search-total-result'>{data.totalResults} RESULTS</div>
+              <div className='search-total-result'>{totalResults} RESULTS</div>
               {movieList.map((movie) => {
                 return (<SideBarListItem key={movie.imdbID} movie={movie} selected={selectedMovieId === movie.imdbID} />);
               })}

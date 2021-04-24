@@ -23,7 +23,6 @@ const movieFilterReducer = (state = initialState, payload) => {
         case FILTER_MOVIE_BY_YEAR:
             return {
                 ...state,
-                page: 1,
                 year: payload.data
             };
         case FILTER_MOVIE_BY_TYPE:

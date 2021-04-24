@@ -1,14 +1,17 @@
 import {
     FETCH_MOVIES_REQUEST,
     FETCH_MOVIES_SUCCESS,
-    FETCH_MOVIES_ERROR
+    FETCH_MOVIES_ERROR,
+    LOAD_MORE_RESULT
 } from '../constants/movieConstant';
 
 const initialState = {
     requesting: false,
     success: false,
     message: null,
-    data: null
+    data: [],
+    totalResults: 0,
+    currentPage: 1
 }
 
 const movieListReducer = (state = initialState, payload) => {
@@ -24,7 +27,9 @@ const movieListReducer = (state = initialState, payload) => {
                 ...state,
                 requesting: false,
                 success: true,
-                data: payload.data
+                data: payload.currentPage > state.currentPage ? [...state.data, ...payload.data.Search] : payload.data.Search,
+                totalResults: payload.data.totalResults,
+                currentPage: payload.currentPage
             };
         
         case FETCH_MOVIES_ERROR:
@@ -33,7 +38,7 @@ const movieListReducer = (state = initialState, payload) => {
                 requesting: false,
                 message: payload.message
             };
-            
+
         default:
             return state;
     }

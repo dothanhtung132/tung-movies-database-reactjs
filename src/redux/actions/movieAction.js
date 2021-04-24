@@ -5,8 +5,7 @@ import {
     Apikey
 } from '../constants/movieConstant';
 
-export const loadMovies = (movieFilter) => async dispatch => {
-    let {title, type, page} = movieFilter;
+export const loadMovies = ({title, type, page}) => async dispatch => {
     if (!title) return;
     try {
         dispatch({type: FETCH_MOVIES_REQUEST});
@@ -14,7 +13,7 @@ export const loadMovies = (movieFilter) => async dispatch => {
         const response = await fetch(url);
         const responseJSON = await response.json();
         if (responseJSON.Response === 'True') {
-            dispatch({type: FETCH_MOVIES_SUCCESS, data: responseJSON});
+            dispatch({type: FETCH_MOVIES_SUCCESS, data: responseJSON, currentPage: page});
         } else {
             dispatch({type: FETCH_MOVIES_ERROR, message: responseJSON.Error});
         }
