@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import './HomePage.scss';
 import Header from '../../components/Header/Header';
 import MainContent from '../../components/MainContent/MainContent';
@@ -8,17 +8,28 @@ import { loadMovies } from '../../redux/actions/movieAction';
 
 const HomePage = () => {
     const movieFilter = useSelector(state => state.movieFilter);
-    console.log('movieFilter :>> ', movieFilter);
-
     const dispatch = useDispatch();
-    dispatch(loadMovies(movieFilter));
-    localStorage.setItem("movieFilter", JSON.stringify(movieFilter));
 
-    const movieDetailFull = useSelector(state => state.movieDetail.movieFull) || {};
-    localStorage.setItem("movieDetailFull", JSON.stringify(movieDetailFull));
+    const {title, type, page} = movieFilter;
+    const loadMoviesByFilter = useCallback(() => {
+        dispatch(loadMovies(movieFilter));
+        localStorage.setItem("movieFilter", JSON.stringify(movieFilter));
+    }, [movieFilter, dispatch])
+    useEffect(() => {
+        loadMoviesByFilter();
+    }, [title, type, page, loadMoviesByFilter]);
 
-    const watchlist = useSelector(state => state.watchlist.watchlist);//useMemo?
-    localStorage.setItem("watchlist", JSON.stringify(watchlist));
+    const movieDetailFull = useSelector(state => state.movieDetail.movieFull);
+    useEffect(() => {
+        console.log('movieDetailFull :>> ', movieDetailFull);
+        localStorage.setItem("movieDetailFull", JSON.stringify(movieDetailFull));
+    }, [movieDetailFull]);
+
+    const watchlist = useSelector(state => state.watchlist.watchlist);
+    useEffect(() => {
+        console.log('watchlist :>> ', watchlist);
+        localStorage.setItem("watchlist", JSON.stringify(watchlist));
+    }, [watchlist]);
 
     return (
         <div className='home-page'>

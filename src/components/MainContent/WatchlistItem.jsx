@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { viewMovieDetail } from '../../redux/actions/movieDetailAction';
+// import { viewMovieDetail } from '../../redux/actions/movieDetailAction';
 import { removeMovieFromWatchlist } from '../../redux/actions/watchlistAction';
 
 const WatchlistItem = ({ movie }) => {
@@ -16,9 +16,10 @@ const WatchlistItem = ({ movie }) => {
 
     const handleWatchlistItemClick =  (event) => {
         event.stopPropagation();
-        dispatch(viewMovieDetail(movie));
+        // dispatch(viewMovieDetail(movie));
+        dispatch({type: 'FETCH_MOVIE_DETAIL_SUCCESS', data: movie});
     }
-    
+
     return (
         <div className='movie-item' onClick={handleWatchlistItemClick}>
             <div
