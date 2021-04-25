@@ -7,8 +7,6 @@ import {
 } from '../constants/movieConstant';
 
 export const viewMovieDetail = (movie) => async dispatch => {
-    console.log('movie :>> ', movie);
-
     try {
         dispatch({type: SET_MOVIE_DETAIL, movie: movie});
         dispatch({type: FETCH_MOVIE_DETAIL_REQUEST});

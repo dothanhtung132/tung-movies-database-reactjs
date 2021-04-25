@@ -31,7 +31,7 @@ const SearchBar = () => {
     return (
         <div>
             <Grid container spacing={1} alignItems="flex-end">
-                <Grid item xs={1}>
+                <Grid item>
                     <SearchRounded style={{ fontSize: '30px' }} />
                 </Grid>
                 <Grid item xs={11}>

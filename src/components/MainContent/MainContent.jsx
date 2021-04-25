@@ -34,7 +34,7 @@ const MainContent = () => {
                             </Button>
                         </div>
                         <div className='info'>
-                            <div className='title'>{Title}</div>
+                            <div className='title'><h1>{Title}</h1></div>
                             <div className='Genre'><span className='rated'>{Rated}</span> {Year} - {Genre} - {Runtime}</div>
                             <div className='actors'>{Actors}</div>
                         </div>
