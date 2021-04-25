@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     }
 });
 
-const SearchBar = () => {
+const SearchBar = ({title}) => {
     const classes = useStyles();
 
     const dispatch = useDispatch();
@@ -44,6 +44,7 @@ const SearchBar = () => {
                             className: classes.customSearchField
                         }}
                         onChange={handleTextFieldChange}
+                        defaultValue={title}
                     />
                 </Grid>
             </Grid>

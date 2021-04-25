@@ -1,64 +1,113 @@
-import { Button } from '@material-ui/core';
-import { Bookmark } from '@material-ui/icons';
+import { Button, Menu, MenuItem } from '@material-ui/core';
+import { Bookmark, BookmarkBorderOutlined } from '@material-ui/icons';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addMovieToWatchlist, removeMovieFromWatchlist } from '../../redux/actions/watchlistAction';
 import './MainContent.scss';
 
 const MainContent = () => {
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
     const movieDetailFull = useSelector(state => state.movieDetail.movieFull) || {};
 
     const { imdbID, Title, Year, Genre, Poster, Actors, Runtime, Rated, Plot, Ratings } = movieDetailFull;
 
+    const handleWatchlistClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    }
+
+    const watchlist = useSelector(state => state.watchlist.watchlist) || [];
+
+    const storedMovie = watchlist.find(movie => movie.imdbID === imdbID);
+    const isInWatchlist = storedMovie ? true : false;
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const dispatch = useDispatch();
+
+    const handleAddToWatchlist = () => {
+        setAnchorEl(null);
+        dispatch(addMovieToWatchlist(movieDetailFull));
+    }
+
+    const handleRemoveFromWatchlist = () => {
+        setAnchorEl(null);
+        dispatch(removeMovieFromWatchlist(imdbID));
+    }
+
+    const handleViewWatchlist = () => {
+
+    }
+
     return (
         <div className='main-content'>
             {
-            imdbID ?
-            <div className='movie-detail-container'>
-                <div className='row-1'>
-                    <div 
-                        className='poster'
-                        style={{
-                            backgroundImage: `url(${Poster})`
-                        }}
-                    >
-                    </div>
-                    <div className='info-container'>
-                        <div className='watchlist-button'>
-                            <Button
-                                variant="outlined"
-                                color="primary"
-                                startIcon={<Bookmark />}
+                imdbID ?
+                    <div className='movie-detail-container'>
+                        <div className='row-1'>
+                            <div
+                                className='poster'
+                                style={{
+                                    backgroundImage: `url(${Poster})`
+                                }}
                             >
-                                Watchlist
-                            </Button>
+                            </div>
+                            <div className='info-container'>
+                                <div className='watchlist-button'>
+                                    <Button
+                                        variant="outlined"
+                                        color="primary"
+                                        startIcon={isInWatchlist ? <Bookmark /> : <BookmarkBorderOutlined />}
+                                        onClick={handleWatchlistClick}
+                                        aria-controls="watchlist-menu"
+                                        aria-haspopup="true"
+                                    >
+                                        Watchlist
+                                    </Button>
+                                    <Menu
+                                        id="watchlist-menu"
+                                        anchorEl={anchorEl}
+                                        keepMounted
+                                        open={Boolean(anchorEl)}
+                                        onClose={handleClose}
+                                    >
+                                        {!isInWatchlist ?
+                                            <MenuItem onClick={handleAddToWatchlist}>Add To Watchlist</MenuItem>
+                                            :
+                                            <MenuItem onClick={handleRemoveFromWatchlist}>Remove From Watchlist</MenuItem>
+                                        }
+                                        <MenuItem onClick={handleViewWatchlist}>View Watchlist</MenuItem>
+                                    </Menu>
+                                </div>
+                                <div className='info'>
+                                    <div className='title'><h1>{Title}</h1></div>
+                                    <div className='Genre'><span className='rated'>{Rated}</span> {Year} - {Genre} - {Runtime}</div>
+                                    <div className='actors'>{Actors}</div>
+                                </div>
+                            </div>
                         </div>
-                        <div className='info'>
-                            <div className='title'><h1>{Title}</h1></div>
-                            <div className='Genre'><span className='rated'>{Rated}</span> {Year} - {Genre} - {Runtime}</div>
-                            <div className='actors'>{Actors}</div>
+                        <div className='row-2'>
+                            {Plot}
+                        </div>
+                        <div className='row-3 rating'>
+                            {
+                                (Ratings && Ratings.length > 0) ?
+                                    Ratings.map((item, index) => {
+                                        return (
+                                            <div key={index}>
+                                                <div>{item.Value}</div>
+                                                <div>{item.Source}</div>
+                                            </div>
+                                        )
+                                    })
+                                    : ''
+                            }
                         </div>
                     </div>
-                </div>
-                <div className='row-2'>
-                    {Plot}
-                </div>
-                <div className='row-3 rating'>
-                    {
-                        (Ratings && Ratings.length > 0) ?
-                        Ratings.map((item, index) => {
-                            return (
-                                <div key={index}>
-                                    <div>{item.Value}</div>
-                                    <div>{item.Source}</div>
-                                </div>
-                            )
-                        })
-                        : ''
-                    }
-                </div>
-            </div>
-            : 'No Items'
+                    : 'No Items'
             }
         </div>
     );

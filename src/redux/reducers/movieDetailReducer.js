@@ -8,7 +8,7 @@ import {
 const initialState = {
     requesting: false,
     movie: null,
-    movieFull: null,
+    movieFull: localStorage.getItem('movieDetailFull') ? JSON.parse(localStorage.getItem('movieDetailFull')) : null,
     message: null
 }
 

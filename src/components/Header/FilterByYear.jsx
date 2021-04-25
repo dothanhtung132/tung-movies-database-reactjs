@@ -25,8 +25,8 @@ const FilterByYearSlider = withStyles({
     }
 })(Slider);
 
-const FilterByYear = () => {
-    const [filterYear, setFilterYear] = useState([1970, 2015]);
+const FilterByYear = ({year}) => {
+    const [filterYear, setFilterYear] = useState(year ? year : [1970, 2015]);
     const dispatch = useDispatch();
 
     const debouncedFunc = useDebounce(value => {

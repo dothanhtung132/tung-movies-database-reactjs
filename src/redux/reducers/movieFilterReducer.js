@@ -5,7 +5,7 @@ import {
     LOAD_MORE_RESULT
 } from '../constants/movieConstant';
 
-const initialState = {
+const initialState = localStorage.getItem('movieFilter') ? JSON.parse(localStorage.getItem('movieFilter')) : {
     title: '',
     type: null,
     year: null,

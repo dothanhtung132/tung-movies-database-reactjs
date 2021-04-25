@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './HomePage.scss';
 import Header from '../../components/Header/Header';
 import MainContent from '../../components/MainContent/MainContent';
@@ -7,12 +7,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadMovies } from '../../redux/actions/movieAction';
 
 const HomePage = () => {
-    const {title, type, page} = useSelector(state => state.movieFilter);
-    const dispatch = useDispatch();
+    const movieFilter = useSelector(state => state.movieFilter);
+    console.log('movieFilter :>> ', movieFilter);
 
-    useEffect(() => {
-        dispatch(loadMovies({title, type, page}));
-    }, [dispatch, title, type, page]);
+    const dispatch = useDispatch();
+    dispatch(loadMovies(movieFilter));
+    localStorage.setItem("movieFilter", JSON.stringify(movieFilter));
+
+    const movieDetailFull = useSelector(state => state.movieDetail.movieFull) || {};
+    localStorage.setItem("movieDetailFull", JSON.stringify(movieDetailFull));
+
+    const watchlist = useSelector(state => state.watchlist.watchlist);//useMemo?
+    localStorage.setItem("watchlist", JSON.stringify(watchlist));
 
     return (
         <div className='home-page'>

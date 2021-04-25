@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 
@@ -21,8 +21,8 @@ const filterTypeData = [
     }
 ];
   
-const FilterByType = () => {
-    const [filterType, setFilterType] = React.useState('any');
+const FilterByType = ({type}) => {
+    const [filterType, setFilterType] = useState(type ? type : 'any');
     const dispatch = useDispatch();
 
     const handleFilterByTypeChange = (event) => {

@@ -59,7 +59,7 @@ const SideBar = () => {
 
   const handleMovieClick = useDebounce((movie) => {
     dispatch(viewMovieDetail(movie));
-  }, 500);
+  }, 300);
 
   return (
     <div className='side-bar'>

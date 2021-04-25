@@ -3,16 +3,18 @@ import './Header.scss'
 import FilterByType from './FilterByType';
 import FilterByYear from './FilterByYear';
 import SearchBar from './SearchBar';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+    const {title, type, year} = useSelector(state => state.movieFilter) || {};
     return (
         <div className='header'>
             <div className='search-bar-container'>
-                <SearchBar />
+                <SearchBar title={title} />
             </div>
             <div className='movie-filter-container'>
-                <FilterByYear />
-                <FilterByType />
+                <FilterByYear year={year} />
+                <FilterByType type={type} />
             </div>
         </div>
     );
