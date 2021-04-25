@@ -70,9 +70,9 @@ const SideBar = () => {
           (movieList && movieList.length > 0) ?
             <List className={`movie-list ${classes.customScrollbar}`}>
               <div className='search-total-result'>{totalResults} RESULTS</div>
-              {movieList.map((movie) => {
-                return (<SideBarListItem key={movie.imdbID} movie={movie} selected={selectedMovieId === movie.imdbID} handleMovieClick={()=>handleMovieClick(movie)} />);
-              })}
+              {movieList.map((movie) => (
+                <SideBarListItem key={movie.imdbID} movie={movie} selected={selectedMovieId === movie.imdbID} handleMovieClick={() => handleMovieClick(movie)} />
+              ))}
               <div className='load-more-result' onClick={handleLoadMore}>Load More...</div>
             </List>
             :

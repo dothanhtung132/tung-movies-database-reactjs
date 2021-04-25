@@ -1,13 +1,16 @@
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { Bookmark, BookmarkBorderOutlined } from '@material-ui/icons';
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMovieToWatchlist, removeMovieFromWatchlist } from '../../redux/actions/watchlistAction';
 import './MainContent.scss';
+import Watchlist from './Watchlist';
 
 const MainContent = () => {
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const [openWatchlist, setOpenWatchlist] = useState(false);
 
     const movieDetailFull = useSelector(state => state.movieDetail.movieFull) || {};
 
@@ -43,7 +46,12 @@ const MainContent = () => {
     }
 
     const handleViewWatchlist = () => {
+        setAnchorEl(null);
+        setOpenWatchlist(true);
+    }
 
+    const handleWatchlistClose = () => {
+        setOpenWatchlist(false);
     }
 
     return (
@@ -113,6 +121,7 @@ const MainContent = () => {
                                     : ''
                             }
                         </div>
+                        <Watchlist open={openWatchlist} onClose={handleWatchlistClose} watchlist={watchlist} />
                     </div>
                     : 'No Items'
             }

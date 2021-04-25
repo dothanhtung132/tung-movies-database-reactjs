@@ -1,0 +1,35 @@
+@mixin not-last-child($selector) {
+    & #{$selector}:not(:last-child) {
+        @content;
+    }
+}
+.watchlist {
+    @include not-last-child(".movie-item") {
+        border-bottom: 1px solid #bbbbbb;
+    }
+    .movie-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        &.active {
+            background-color: #ebebeb;
+        }
+        .movie-thumbnail {
+            height: 80px;
+            margin-right: 20px;
+            flex: 0 0 60px;
+            border-radius: 4px;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid #bbbbbb;
+            background-color: #cccccc;
+        }
+        .movie-info {
+            flex: 1 1 auto;
+            line-height: 25px;
+            .year {
+                color: gray;
+            }
+        }
+    }
+}
