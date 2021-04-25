@@ -13,14 +13,14 @@ const MainContent = () => {
 
     const { imdbID, Title, Year, Genre, Poster, Actors, Runtime, Rated, Plot, Ratings } = movieDetailFull;
 
-    const handleWatchlistClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    }
-
     const watchlist = useSelector(state => state.watchlist.watchlist) || [];
 
     const storedMovie = watchlist.find(movie => movie.imdbID === imdbID);
     const isInWatchlist = storedMovie ? true : false;
+
+    const handleWatchlistClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    }
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -30,12 +30,16 @@ const MainContent = () => {
 
     const handleAddToWatchlist = () => {
         setAnchorEl(null);
-        dispatch(addMovieToWatchlist(movieDetailFull));
+        setTimeout(()=>{
+            dispatch(addMovieToWatchlist(movieDetailFull));
+        }, 100);
     }
 
     const handleRemoveFromWatchlist = () => {
         setAnchorEl(null);
-        dispatch(removeMovieFromWatchlist(imdbID));
+        setTimeout(()=>{
+            dispatch(removeMovieFromWatchlist(imdbID));
+        }, 100);
     }
 
     const handleViewWatchlist = () => {
@@ -73,7 +77,10 @@ const MainContent = () => {
                                         keepMounted
                                         open={Boolean(anchorEl)}
                                         onClose={handleClose}
-                                    >
+                                        getContentAnchorEl={null}
+                                        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                                        transformOrigin={{ vertical: "top", horizontal: "center" }}
+                                        >
                                         {!isInWatchlist ?
                                             <MenuItem onClick={handleAddToWatchlist}>Add To Watchlist</MenuItem>
                                             :
