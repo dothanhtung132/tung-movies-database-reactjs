@@ -26,11 +26,12 @@ const FilterByYearSlider = withStyles({
 })(Slider);
 
 const FilterByYear = ({year}) => {
-    const [filterYear, setFilterYear] = useState(year ? year : [1970, 2015]);
+    const startYear = 1970;
+    const endYear = new Date().getFullYear();
+    const [filterYear, setFilterYear] = useState(year ? year : [startYear, endYear]);
     const dispatch = useDispatch();
 
     const debouncedFunc = useDebounce(value => {
-        console.log('value :>> ', value);
         dispatch({type: 'FILTER_MOVIE_BY_YEAR', data: value});
     }, 500);
 
@@ -52,17 +53,14 @@ const FilterByYear = ({year}) => {
                         value={filterYear}
                         onChange={handleSliderChange}
                         aria-labelledby="filter-by-year-slider"
-                        min={1970}
-                        max={2015}
+                        min={startYear}
+                        max={endYear}
                     />
                 </Grid>
                 <Grid item>
                     <Typography>{filterYear[1]}</Typography>
                 </Grid>
             </Grid>
-
-
-
         </div>
     );
 };
