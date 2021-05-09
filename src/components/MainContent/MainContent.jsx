@@ -1,6 +1,6 @@
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { Bookmark, BookmarkBorderOutlined } from '@material-ui/icons';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMovieToWatchlist, removeMovieFromWatchlist } from '../../redux/actions/watchlistAction';
 import './MainContent.scss';
@@ -50,9 +50,9 @@ const MainContent = () => {
         setOpenWatchlist(true);
     }
 
-    const handleWatchlistClose = () => {
+    const handleWatchlistClose = useCallback(() => {
         setOpenWatchlist(false);
-    }
+    }, []);
 
     return (
         <div className='main-content'>
