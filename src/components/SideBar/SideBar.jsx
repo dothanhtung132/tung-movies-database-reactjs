@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './SideBar.scss';
 import SideBarListItem from './SideBarListItem';
-import { useDebounce } from '../../customHooks/useDebounce';
-import { viewMovieDetail } from '../../redux/actions/movieDetailAction';
 
 const useStyles = makeStyles((theme) => ({
   customScrollbar: {
@@ -23,9 +21,6 @@ const SideBar = () => {
   const data = useSelector(state => state.movieList.data);
   const totalResults = useSelector(state => state.movieList.totalResults);
   const requesting = useSelector(state => state.movieList.requesting);
-
-  const movieDetail = useSelector(state => state.movieDetail.movie);
-  const selectedMovieId = movieDetail?.imdbID;
 
   const dispatch = useDispatch();
 
@@ -57,10 +52,6 @@ const SideBar = () => {
   //   return () => window.removeEventListener('scroll', handleScroll);
   // }, []);
 
-  const handleMovieClick = useDebounce((movie) => {
-    dispatch(viewMovieDetail(movie));
-  }, 300);
-
   return (
     <div className='side-bar'>
       {
@@ -71,7 +62,7 @@ const SideBar = () => {
             <List className={`movie-list ${classes.customScrollbar}`}>
               <div className='search-total-result'>{totalResults} RESULTS</div>
               {movieList.map((movie) => (
-                <SideBarListItem key={movie.imdbID} movie={movie} selected={selectedMovieId === movie.imdbID} handleMovieClick={() => handleMovieClick(movie)} />
+                <SideBarListItem key={movie.imdbID} movie={movie} />
               ))}
               <div className='load-more-result' onClick={handleLoadMore}>Load More...</div>
             </List>
@@ -82,4 +73,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+export default React.memo(SideBar);

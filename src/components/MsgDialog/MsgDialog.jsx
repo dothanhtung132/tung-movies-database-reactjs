@@ -43,4 +43,4 @@ const MsgDialog = ({okButtonTitle='OK', showCancelBtn=false, okButtonCallback}) 
     );
 };
 
-export default MsgDialog;
+export default React.memo(MsgDialog);

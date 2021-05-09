@@ -1,9 +1,20 @@
-import React, {  } from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { viewMovieDetail } from '../../redux/actions/movieDetailAction';
 
-const SideBarListItem = ({movie, selected, handleMovieClick}) => {
+const SideBarListItem = ({movie}) => {
     const { Title, Year, Poster } = movie;
+
+    const dispatch = useDispatch();
+    const handleMovieClick = useCallback(() => {
+        dispatch(viewMovieDetail(movie));
+    }, [dispatch, movie]);
+
+    const movieDetail = useSelector(state => state.movieDetail.movie) || {};
+    const isSelected = movieDetail.imdbID === movie.imdbID;
+    
     return (
-        <div className={`movie-item ${selected ? 'active' : ''}`} onClick={handleMovieClick}>
+        <div className={`movie-item ${isSelected ? 'active' : ''}`} onClick={handleMovieClick}>
             <div
                 className='movie-thumbnail'
                 style={{
