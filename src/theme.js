@@ -1,7 +1,6 @@
-// import { createMuiTheme } from '@material-ui/core/styles';
 import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core';
 
-// A custom theme for this app
+// Fix Warning about deprecated findDOMNode
 const theme = createMuiTheme({
     typography: {
         fontFamily: 'Raleway, Arial',

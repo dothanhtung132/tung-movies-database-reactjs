@@ -2,9 +2,9 @@ import {
     SET_MOVIE_DETAIL,
     FETCH_MOVIE_DETAIL_REQUEST,
     FETCH_MOVIE_DETAIL_SUCCESS,
-    FETCH_MOVIE_DETAIL_ERROR,
     Apikey
 } from '../constants/movieConstant';
+import { showErrorDialog } from './msgDialogAction';
 
 export const viewMovieDetail = (movie) => async dispatch => {
     try {
@@ -15,10 +15,13 @@ export const viewMovieDetail = (movie) => async dispatch => {
         const response = await fetch(url);
         const responseJSON = await response.json();
 
-        dispatch({type: FETCH_MOVIE_DETAIL_SUCCESS, data: responseJSON});
+        if (responseJSON.Response === 'True') {
+            dispatch({type: FETCH_MOVIE_DETAIL_SUCCESS, data: responseJSON});
+        } else {
+            dispatch(showErrorDialog(responseJSON.Error));
+        }
     } catch (error) {
-        console.log('error :>> ', error);
-        dispatch({type: FETCH_MOVIE_DETAIL_ERROR, message: error});
+        dispatch(showErrorDialog(error));
     }
 
 

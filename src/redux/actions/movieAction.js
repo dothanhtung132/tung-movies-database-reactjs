@@ -1,9 +1,9 @@
 import {
     FETCH_MOVIES_REQUEST,
     FETCH_MOVIES_SUCCESS,
-    FETCH_MOVIES_ERROR,
     Apikey
 } from '../constants/movieConstant';
+import { showErrorDialog } from './msgDialogAction';
 
 export const loadMovies = ({title, type, page}) => async dispatch => {
     if (!title) return;
@@ -15,10 +15,10 @@ export const loadMovies = ({title, type, page}) => async dispatch => {
         if (responseJSON.Response === 'True') {
             dispatch({type: FETCH_MOVIES_SUCCESS, data: responseJSON, currentPage: page});
         } else {
-            dispatch({type: FETCH_MOVIES_ERROR, message: responseJSON.Error});
+            dispatch(showErrorDialog(responseJSON.Error))
         }
     } catch (error) {
-        console.log('error :>> ', error);
-        dispatch({type: FETCH_MOVIES_ERROR, message: error});
+        // console.log('error :>> ', error);
+        dispatch(showErrorDialog(error))
     }
 }

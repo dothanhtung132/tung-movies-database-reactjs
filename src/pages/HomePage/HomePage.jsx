@@ -5,6 +5,7 @@ import MainContent from '../../components/MainContent/MainContent';
 import SideBar from '../../components/SideBar/SideBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadMovies } from '../../redux/actions/movieAction';
+import MsgDialog from '../../components/MsgDialog/MsgDialog';
 
 const HomePage = () => {
     const movieFilter = useSelector(state => state.movieFilter);
@@ -14,20 +15,19 @@ const HomePage = () => {
     const loadMoviesByFilter = useCallback(() => {
         dispatch(loadMovies(movieFilter));
         localStorage.setItem("movieFilter", JSON.stringify(movieFilter));
-    }, [movieFilter, dispatch])
+    }, [movieFilter, dispatch]);
+
     useEffect(() => {
         loadMoviesByFilter();
     }, [title, type, page, loadMoviesByFilter]);
 
     const movieDetailFull = useSelector(state => state.movieDetail.movieFull);
     useEffect(() => {
-        console.log('movieDetailFull :>> ', movieDetailFull);
         localStorage.setItem("movieDetailFull", JSON.stringify(movieDetailFull));
     }, [movieDetailFull]);
 
     const watchlist = useSelector(state => state.watchlist.watchlist);
     useEffect(() => {
-        console.log('watchlist :>> ', watchlist);
         localStorage.setItem("watchlist", JSON.stringify(watchlist));
     }, [watchlist]);
 
@@ -36,6 +36,7 @@ const HomePage = () => {
             <Header />
             <SideBar />
             <MainContent />
+            <MsgDialog />
         </div>
     );
 };
