@@ -1,17 +1,19 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { viewMovieDetail } from '../../redux/actions/movieDetailAction';
 
 const SideBarListItem = ({movie}) => {
-    const { Title, Year, Poster } = movie;
+    const { imdbID, Title, Year, Poster } = movie;
 
+    const movieDetail = useSelector(state => state.movieDetail.movie);
+    const isSelected = movieDetail?.imdbID === imdbID;
+
+    const isRequesting = useSelector(state => state.movieDetail.requesting);
     const dispatch = useDispatch();
-    const handleMovieClick = useCallback(() => {
+    const handleMovieClick = () => {
+        if (isSelected || isRequesting) return;
         dispatch(viewMovieDetail(movie));
-    }, [dispatch, movie]);
-
-    const movieDetail = useSelector(state => state.movieDetail.movie) || {};
-    const isSelected = movieDetail.imdbID === movie.imdbID;
+    };
     
     return (
         <div className={`movie-item ${isSelected ? 'active' : ''}`} onClick={handleMovieClick}>
