@@ -3,3 +3,16 @@
         text-align: center;
     }
 }
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #c4c4c4;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}

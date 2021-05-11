@@ -1,23 +1,10 @@
-import { List, makeStyles } from '@material-ui/core';
+import { List } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './SideBar.scss';
 import SideBarListItem from './SideBarListItem';
 
-const useStyles = makeStyles((theme) => ({
-  customScrollbar: {
-    "&::-webkit-scrollbar": {
-      width: 12,
-    },
-    "&::-webkit-scrollbar-thumb": {
-      backgroundColor: "#c4c4c4",
-    },
-  },
-}));
-
 const SideBar = () => {
-  const classes = useStyles();
-
   const data = useSelector(state => state.movieList.data);
   const totalResults = useSelector(state => state.movieList.totalResults);
   const requesting = useSelector(state => state.movieList.requesting);
@@ -59,7 +46,7 @@ const SideBar = () => {
           'requesting'
           :
           (movieList && movieList.length > 0) ?
-            <List className={`movie-list ${classes.customScrollbar}`}>
+            <List className={`movie-list`}>
               <div className='search-total-result'>{totalResults} RESULTS</div>
               {movieList.map((movie) => (
                 <SideBarListItem key={movie.imdbID} movie={movie} />
