@@ -38,10 +38,13 @@ const HomePage = () => {
     const MainContentWithSpinner = WithSpinner(MainContent);
     const isLoadingDetail = useSelector(state => state.movieDetail.requesting);
 
+    const SideBarWithSpinner = WithSpinner(SideBar);
+    const isLoadingMovieList = useSelector(state => state.movieList.requesting);
+
     return (
         <div className='home-page'>
             <Header />
-            <SideBar />
+            <SideBarWithSpinner isLoading={isLoadingMovieList} />
             <MainContentWithSpinner isLoading={isLoadingDetail} />
             <MsgDialog />
         </div>
