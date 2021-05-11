@@ -3,6 +3,7 @@ import { Bookmark, BookmarkBorderOutlined } from '@material-ui/icons';
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMovieToWatchlist, removeMovieFromWatchlist } from '../../redux/actions/watchlistAction';
+import WithSpinner from '../Spinner/WithSpinner';
 import './MainContent.scss';
 import Watchlist from './Watchlist';
 
@@ -13,6 +14,7 @@ const MainContent = () => {
     const [openWatchlist, setOpenWatchlist] = useState(false);
 
     const movieDetailFull = useSelector(state => state.movieDetail.movieFull) || {};
+    const isLoading = useSelector(state => state.movieDetail.requesting);
 
     const { imdbID, Title, Year, Genre, Poster, Actors, Runtime, Rated, Plot, Ratings } = movieDetailFull;
 
@@ -125,6 +127,7 @@ const MainContent = () => {
                     </div>
                     : 'No Items'
             }
+            <WithSpinner isLoading={isLoading} />
         </div>
     );
 };

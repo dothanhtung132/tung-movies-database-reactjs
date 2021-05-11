@@ -1,6 +1,7 @@
 .side-bar {
     grid-area: sidebar;
     border-right: 1px solid #bbbbbb;
+    position: relative;
     .movie-list {
         height: calc(100vh - 100px);
         overflow-y: overlay;
