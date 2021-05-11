@@ -12,24 +12,27 @@ const HomePage = () => {
     const dispatch = useDispatch();
 
     const {title, type, page} = movieFilter;
+    const movieFilterStr = JSON.stringify(movieFilter);
     const loadMoviesByFilter = useCallback(() => {
-        dispatch(loadMovies(movieFilter));
-        localStorage.setItem("movieFilter", JSON.stringify(movieFilter));
-    }, [movieFilter, dispatch]);
+        dispatch(loadMovies(JSON.parse(movieFilterStr)));
+        localStorage.setItem("movieFilter", movieFilterStr);
+    }, [movieFilterStr, dispatch]);
 
     useEffect(() => {
         loadMoviesByFilter();
     }, [title, type, page, loadMoviesByFilter]);
 
     const movieDetailFull = useSelector(state => state.movieDetail.movieFull);
+    const movieStr = JSON.stringify(movieDetailFull);
     useEffect(() => {
-        localStorage.setItem("movieDetailFull", JSON.stringify(movieDetailFull));
-    }, [movieDetailFull]);
+        localStorage.setItem("movieDetailFull", movieStr);
+    }, [movieStr]);
 
     const watchlist = useSelector(state => state.watchlist.watchlist);
+    const watchlistStr = JSON.stringify(watchlist);
     useEffect(() => {
-        localStorage.setItem("watchlist", JSON.stringify(watchlist));
-    }, [watchlist]);
+        localStorage.setItem("watchlist", watchlistStr);
+    }, [watchlistStr]);
 
     return (
         <div className='home-page'>

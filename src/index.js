@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/styles';
 import theme from './theme';
-import {store} from './redux/store';
+import { store } from './redux/store';
 import { Provider } from 'react-redux';
 
 ReactDOM.render(
@@ -19,7 +19,7 @@ ReactDOM.render(
       </ThemeProvider>
     </React.StrictMode>
   </BrowserRouter>
-  ,document.getElementById('root')
+  , document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
