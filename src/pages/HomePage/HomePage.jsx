@@ -6,6 +6,7 @@ import SideBar from '../../components/SideBar/SideBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadMovies } from '../../redux/actions/movieAction';
 import MsgDialog from '../../components/MsgDialog/MsgDialog';
+import WithSpinner from '../../components/Spinner/WithSpinner';
 
 const HomePage = () => {
     const movieFilter = useSelector(state => state.movieFilter);
@@ -34,11 +35,14 @@ const HomePage = () => {
         localStorage.setItem("watchlist", watchlistStr);
     }, [watchlistStr]);
 
+    const MainContentWithSpinner = WithSpinner(MainContent);
+    const isLoadingDetail = useSelector(state => state.movieDetail.requesting);
+
     return (
         <div className='home-page'>
             <Header />
             <SideBar />
-            <MainContent />
+            <MainContentWithSpinner isLoading={isLoadingDetail} />
             <MsgDialog />
         </div>
     );

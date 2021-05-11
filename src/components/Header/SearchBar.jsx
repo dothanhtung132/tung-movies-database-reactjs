@@ -18,7 +18,7 @@ const SearchBar = ({title}) => {
     const dispatch = useDispatch();
 
     const debouncedFunc = useDebounce(title => {
-        console.log('title :>> ', title);
+        // console.log('title :>> ', title);
         if (title) {
             dispatch({ type: 'FILTER_MOVIE_BY_TITLE', data: title });
         }
