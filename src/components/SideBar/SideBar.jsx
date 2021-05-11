@@ -47,7 +47,6 @@ const SideBar = () => {
   useEffect(() => {
     const scrollEl = document.getElementById('movie-list-container');
     scrollEl.addEventListener('scroll', handleScroll);
-    scrollEl.scrollTop = lastScroll.current;
     return () => scrollEl.removeEventListener('scroll', handleScroll);
   });
 
