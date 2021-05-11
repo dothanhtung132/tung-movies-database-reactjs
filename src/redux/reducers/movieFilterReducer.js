@@ -11,6 +11,7 @@ const initialState = localStorage.getItem('movieFilter') ? JSON.parse(localStora
     year: null,
     page: 1
 }
+initialState.page = 1;//dont save current page
 
 const movieFilterReducer = (state = initialState, payload) => {
     switch (payload.type) {

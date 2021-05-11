@@ -9,10 +9,11 @@ import MsgDialog from '../../components/MsgDialog/MsgDialog';
 import WithSpinner from '../../components/Spinner/WithSpinner';
 
 const HomePage = () => {
-    const movieFilter = useSelector(state => state.movieFilter);
+    const movieFilter = useSelector(state => state.movieFilter) || {};
     const dispatch = useDispatch();
 
     const {title, type, page} = movieFilter;
+
     const movieFilterStr = JSON.stringify(movieFilter);
     const loadMoviesByFilter = useCallback(() => {
         dispatch(loadMovies(JSON.parse(movieFilterStr)));
@@ -38,13 +39,13 @@ const HomePage = () => {
     const MainContentWithSpinner = WithSpinner(MainContent);
     const isLoadingDetail = useSelector(state => state.movieDetail.requesting);
 
-    const SideBarWithSpinner = WithSpinner(SideBar);
-    const isLoadingMovieList = useSelector(state => state.movieList.requesting);
-
+    // const SideBarWithSpinner = WithSpinner(SideBar);
+    // const isLoadingMovieList = useSelector(state => state.movieList.requesting);
+    // const isLoadingMovieList = true
     return (
         <div className='home-page'>
             <Header />
-            <SideBarWithSpinner isLoading={isLoadingMovieList} />
+            <SideBar />
             <MainContentWithSpinner isLoading={isLoadingDetail} />
             <MsgDialog />
         </div>
