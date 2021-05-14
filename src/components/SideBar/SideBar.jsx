@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './SideBar.scss';
 import SideBarListItem from './SideBarListItem';
 import WithSpinner from '../Spinner/WithSpinner';
+import { useDebounce } from '../../customHooks/useDebounce';
 
 const SideBar = () => {
   let lastScroll = useRef(0);
@@ -32,17 +33,18 @@ const SideBar = () => {
     setMovieList(filterList);
   }, [year, data]);
 
-  const handleScroll = useCallback(() => {
+  const handleScroll = useDebounce(() => {
+    console.log('scroll down');
     const scrollEl = document.getElementById('movie-list-container');
     let currentScroll = scrollEl.scrollTop;
-    if (currentScroll > 0 && lastScroll.current <= currentScroll) {//is scroll down
-      if (scrollEl.scrollHeight - scrollEl.scrollTop === scrollEl.clientHeight) {//is bottom
+    const isScrolldown = currentScroll > 0 && lastScroll.current <= currentScroll;
+    const isBottom = scrollEl.scrollHeight - scrollEl.scrollTop === scrollEl.clientHeight;
+    if (isScrolldown && isBottom) {
         console.log('Fetch more list items!');
         handleLoadMore();
-      }
     }
     lastScroll.current = currentScroll;
-  }, [handleLoadMore]);
+  }, 100);
 
   useEffect(() => {
     const scrollEl = document.getElementById('movie-list-container');
