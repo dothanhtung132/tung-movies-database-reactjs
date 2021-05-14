@@ -56,6 +56,10 @@ const MainContent = () => {
         setOpenWatchlist(false);
     }, []);
 
+    Ratings.forEach((item, index) => {
+        item.key = `rating_${index}`;
+    });
+
     return (
         <div className='main-content'>
             {
@@ -112,11 +116,11 @@ const MainContent = () => {
                         <div className='row-3 rating'>
                             {
                                 (Ratings && Ratings.length > 0) ?
-                                    Ratings.map((item, index) => {
+                                    Ratings.map(({key, Value, Source}) => {
                                         return (
-                                            <div key={index}>
-                                                <div>{item.Value}</div>
-                                                <div>{item.Source}</div>
+                                            <div key={key}>
+                                                <div>{Value}</div>
+                                                <div>{Source}</div>
                                             </div>
                                         )
                                     })
